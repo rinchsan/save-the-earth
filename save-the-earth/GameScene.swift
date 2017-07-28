@@ -14,6 +14,10 @@ class GameScene: SKScene {
     var earth: SKSpriteNode!
     var spaceship: SKSpriteNode!
 
+    let spaceshipCategory: UInt32 = 0b0001
+    let missileCategory: UInt32 = 0b0010
+    let asteroidCategory: UInt32 = 0b0100
+
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 
@@ -28,7 +32,19 @@ class GameScene: SKScene {
         addChild(spaceship)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let missile = SKSpriteNode(imageNamed: "missile")
+        missile.position = CGPoint(x: spaceship.position.x, y: spaceship.position.y + 10)
+        missile.physicsBody = SKPhysicsBody(circleOfRadius: missile.frame.height / 2)
+        missile.physicsBody?.isDynamic = true
+        missile.physicsBody?.categoryBitMask = missileCategory
+        missile.physicsBody?.contactTestBitMask = asteroidCategory
+        missile.physicsBody?.collisionBitMask = 0
+        addChild(missile)
+
+        let moveToTop = SKAction.moveTo(y: frame.height + 10, duration: 0.3)
+        let remove = SKAction.removeFromParent()
+        missile.run(SKAction.sequence([moveToTop, remove]))
     }
 
     override func update(_ currentTime: TimeInterval) {
