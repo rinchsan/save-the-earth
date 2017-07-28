@@ -9,14 +9,13 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
 
     var earth: SKSpriteNode!
     var spaceship: SKSpriteNode!
 
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        self.physicsWorld.contactDelegate = self
 
         earth = childNode(withName: "earth") as! SKSpriteNode
         earth.xScale = 2
