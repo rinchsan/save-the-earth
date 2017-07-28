@@ -1,14 +1,101 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VCi-Wr-9a5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Menu View Controller-->
+        <scene sceneID="fBO-0w-Ln6">
+            <objects>
+                <viewController id="VCi-Wr-9a5" customClass="MenuViewController" customModule="save_the_earth" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CfK-xf-gLe"/>
+                        <viewControllerLayoutGuide type="bottom" id="R8n-3J-Jhn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vyf-5h-zK0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apF-vC-Zja">
+                                <rect key="frame" x="16" y="577" width="343" height="70"/>
+                                <color key="backgroundColor" red="0.29382336509339418" green="0.54491196065989855" blue="0.26387915716144372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="IY6-vG-dMC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <state key="normal" title="START">
+                                    <color key="titleColor" red="0.01581127373742473" green="0.32188215775020151" blue="0.54491196065989855" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="presentation" modalTransitionStyle="crossDissolve" id="R8O-SR-rqd"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="earth" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-e9-WvH">
+                                <rect key="frame" x="46" y="50" width="283" height="497"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7h-FY-sI8">
+                                <rect key="frame" x="151" y="260" width="73.5" height="77.5"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="50"/>
+                                <color key="textColor" red="0.85047264936316214" green="0.85987071700507622" blue="0.85456752681722514" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AE1-J3-tLQ">
+                                <rect key="frame" x="123" y="167" width="129.5" height="93"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="60"/>
+                                <color key="textColor" red="0.8504726494" green="0.85987071699999995" blue="0.85456752680000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-oB-re1">
+                                <rect key="frame" x="109.5" y="337" width="156" height="93"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="60"/>
+                                <color key="textColor" red="0.8504726494" green="0.85987071699999995" blue="0.85456752680000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aO2-NT-mtA">
+                                <rect key="frame" x="16" y="516" width="343" height="31"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="20"/>
+                                <color key="textColor" red="0.8504726494" green="0.85987071699999995" blue="0.85456752680000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.37755789974619292" green="0.37755789974619292" blue="0.37755789974619292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="apF-vC-Zja" firstAttribute="leading" secondItem="vyf-5h-zK0" secondAttribute="leadingMargin" id="6OK-x7-anE"/>
+                            <constraint firstItem="BlQ-e9-WvH" firstAttribute="leading" secondItem="vyf-5h-zK0" secondAttribute="leadingMargin" constant="30" id="7gZ-1m-6gP"/>
+                            <constraint firstItem="AE1-J3-tLQ" firstAttribute="centerX" secondItem="h7h-FY-sI8" secondAttribute="centerX" id="ByX-rX-1p6"/>
+                            <constraint firstItem="apF-vC-Zja" firstAttribute="top" secondItem="BlQ-e9-WvH" secondAttribute="bottom" constant="30" id="RQl-no-B8z"/>
+                            <constraint firstItem="h7h-FY-sI8" firstAttribute="centerY" secondItem="BlQ-e9-WvH" secondAttribute="centerY" id="Vj8-YB-wmS"/>
+                            <constraint firstItem="BlQ-e9-WvH" firstAttribute="top" secondItem="CfK-xf-gLe" secondAttribute="bottom" constant="30" id="ZFH-4S-0g6"/>
+                            <constraint firstItem="aO2-NT-mtA" firstAttribute="trailing" secondItem="vyf-5h-zK0" secondAttribute="trailingMargin" id="ZLD-fI-N02"/>
+                            <constraint firstItem="aO2-NT-mtA" firstAttribute="leading" secondItem="vyf-5h-zK0" secondAttribute="leadingMargin" id="buT-5M-4ID"/>
+                            <constraint firstItem="h7h-FY-sI8" firstAttribute="top" secondItem="AE1-J3-tLQ" secondAttribute="bottom" id="cxx-TX-nkq"/>
+                            <constraint firstItem="apF-vC-Zja" firstAttribute="top" secondItem="aO2-NT-mtA" secondAttribute="bottom" constant="30" id="ffl-M9-J6u"/>
+                            <constraint firstItem="3VK-oB-re1" firstAttribute="centerX" secondItem="h7h-FY-sI8" secondAttribute="centerX" id="iS3-ML-0Nd"/>
+                            <constraint firstItem="R8n-3J-Jhn" firstAttribute="top" secondItem="apF-vC-Zja" secondAttribute="bottom" constant="20" id="jwG-cV-qrX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BlQ-e9-WvH" secondAttribute="trailing" constant="30" id="kKF-3p-jW9"/>
+                            <constraint firstItem="h7h-FY-sI8" firstAttribute="centerX" secondItem="BlQ-e9-WvH" secondAttribute="centerX" id="uUG-K0-ifY"/>
+                            <constraint firstItem="3VK-oB-re1" firstAttribute="top" secondItem="h7h-FY-sI8" secondAttribute="bottom" constant="-0.5" id="wzj-do-PYE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="apF-vC-Zja" secondAttribute="trailing" id="zQK-a5-FqT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bestScoreLabel" destination="aO2-NT-mtA" id="ffC-Lr-5kb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="blK-pC-Pnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-773.60000000000002" y="38.23088455772114"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="save_the_earth" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -23,4 +110,7 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="earth" width="4437" height="4437"/>
+    </resources>
 </document>
