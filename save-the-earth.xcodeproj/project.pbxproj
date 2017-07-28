@@ -15,6 +15,7 @@
 		572661031F2BBCBE009E0E24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572661011F2BBCBE009E0E24 /* Main.storyboard */; };
 		572661051F2BBCBE009E0E24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 572661041F2BBCBE009E0E24 /* Assets.xcassets */; };
 		572661081F2BBCBE009E0E24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572661061F2BBCBE009E0E24 /* LaunchScreen.storyboard */; };
+		5782A3C31F2BCFA200500EFD /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782A3C21F2BCFA200500EFD /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		572661041F2BBCBE009E0E24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		572661071F2BBCBE009E0E24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		572661091F2BBCBE009E0E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5782A3C21F2BCFA200500EFD /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				572660FD1F2BBCBE009E0E24 /* GameScene.swift */,
 				572660FF1F2BBCBE009E0E24 /* GameViewController.swift */,
 				572661011F2BBCBE009E0E24 /* Main.storyboard */,
+				5782A3C21F2BCFA200500EFD /* MenuViewController.swift */,
 				572661041F2BBCBE009E0E24 /* Assets.xcassets */,
 				572661061F2BBCBE009E0E24 /* LaunchScreen.storyboard */,
 				572661091F2BBCBE009E0E24 /* Info.plist */,
@@ -151,6 +154,7 @@
 				572660FE1F2BBCBE009E0E24 /* GameScene.swift in Sources */,
 				572661001F2BBCBE009E0E24 /* GameViewController.swift in Sources */,
 				572660F81F2BBCBE009E0E24 /* AppDelegate.swift in Sources */,
+				5782A3C31F2BCFA200500EFD /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +318,7 @@
 				5726610E1F2BBCBE009E0E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
