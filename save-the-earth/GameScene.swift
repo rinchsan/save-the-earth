@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import CoreMotion
 
 class GameScene: SKScene {
 
@@ -17,6 +18,9 @@ class GameScene: SKScene {
     let spaceshipCategory: UInt32 = 0b0001
     let missileCategory: UInt32 = 0b0010
     let asteroidCategory: UInt32 = 0b0100
+
+    let motionManger = CMMotionManager()
+    var acceleration: CGFloat = 0.0
 
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -30,6 +34,13 @@ class GameScene: SKScene {
         spaceship.scale(to: CGSize(width: frame.width / 5, height: frame.width / 5))
         spaceship.position = CGPoint(x: frame.width / 2, y: earth.frame.maxY + 50)
         addChild(spaceship)
+
+        motionManger.accelerometerUpdateInterval = 0.2
+        motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data: CMAccelerometerData?, error: Error?) in
+            guard let accelerometerData = data else { return }
+            let acceleration = accelerometerData.acceleration
+            self.acceleration = CGFloat(acceleration.x) * 0.75 + self.acceleration * 0.25
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -47,7 +58,11 @@ class GameScene: SKScene {
         missile.run(SKAction.sequence([moveToTop, remove]))
     }
 
-    override func update(_ currentTime: TimeInterval) {
+    override func didSimulatePhysics() {
+        let nextPasitionX = spaceship.position.x + acceleration * 50
+        guard nextPasitionX > 30 else { return }
+        guard nextPasitionX < frame.width - 30 else { return }
+        spaceship.position.x = nextPasitionX
     }
 
 }
