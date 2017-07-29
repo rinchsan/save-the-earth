@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var earth: SKSpriteNode!
     var spaceship: SKSpriteNode!
     var life: [SKSpriteNode] = [SKSpriteNode]()
+    var scoreLabel: SKLabelNode!
 
     // MARK: - Category Bit Mask
 
@@ -30,6 +31,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let motionManger = CMMotionManager()
     var acceleration: CGFloat = 0.0
     var timer: Timer? = nil
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
 
     // MARK: - Life Cycle
 
@@ -73,6 +79,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(heart)
             life.append(heart)
         }
+
+        scoreLabel = SKLabelNode(text: "Score: 0")
+        scoreLabel.fontName = "Papyrus"
+        scoreLabel.fontSize = 50
+        scoreLabel.position = CGPoint(x: scoreLabel.frame.width / 2 + 50, y: frame.height - scoreLabel.frame.height * 5)
+        addChild(scoreLabel)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
