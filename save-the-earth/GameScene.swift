@@ -16,6 +16,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var earth: SKSpriteNode!
     var spaceship: SKSpriteNode!
+    var life: [SKSpriteNode] = [SKSpriteNode]()
+    var scoreLabel: SKLabelNode!
 
     // MARK: - Category Bit Mask
 
@@ -29,6 +31,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let motionManger = CMMotionManager()
     var acceleration: CGFloat = 0.0
     var timer: Timer? = nil
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
 
     // MARK: - Life Cycle
 
@@ -65,6 +72,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(addAsteroid), userInfo: nil, repeats: true)
+
+        for i in 1...5 {
+            let heart = SKSpriteNode(imageNamed: "heart")
+            heart.position = CGPoint(x: heart.frame.height * CGFloat(i), y: frame.height - heart.frame.height)
+            addChild(heart)
+            life.append(heart)
+        }
+
+        scoreLabel = SKLabelNode(text: "Score: 0")
+        scoreLabel.fontName = "Papyrus"
+        scoreLabel.fontSize = 50
+        scoreLabel.position = CGPoint(x: scoreLabel.frame.width / 2 + 50, y: frame.height - scoreLabel.frame.height * 5)
+        addChild(scoreLabel)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -137,6 +157,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.run(SKAction.wait(forDuration: 1.0)) {
             explosion.removeFromParent()
+        }
+
+        switch collisionTarget.categoryBitMask {
+        case spaceshipCategory, earthCategory:
+            guard let heart = life.last else { return }
+            heart.removeFromParent()
+            life.removeLast()
+        case missileCategory:
+            score += 5
+        default:
+            fatalError()
         }
     }
 
