@@ -12,15 +12,23 @@ import CoreMotion
 
 class GameScene: SKScene {
 
+    // MARK: - Nodes
+
     var earth: SKSpriteNode!
     var spaceship: SKSpriteNode!
+
+    // MARK: - Category Bit Mask
 
     let spaceshipCategory: UInt32 = 0b0001
     let missileCategory: UInt32 = 0b0010
     let asteroidCategory: UInt32 = 0b0100
 
+    // MARK: - Properties
+
     let motionManger = CMMotionManager()
     var acceleration: CGFloat = 0.0
+
+    // MARK: - Life Cycle
 
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
