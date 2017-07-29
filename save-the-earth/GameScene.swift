@@ -88,6 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard !isPaused else { return }
         let missile = SKSpriteNode(imageNamed: "missile")
         missile.position = CGPoint(x: spaceship.position.x, y: spaceship.position.y + 10)
         missile.physicsBody = SKPhysicsBody(circleOfRadius: missile.frame.height / 2)
@@ -164,11 +165,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let heart = life.last else { return }
             heart.removeFromParent()
             life.removeLast()
+            if life.isEmpty { showResult() }
         case missileCategory:
             score += 5
         default:
             fatalError()
         }
+    }
+
+    func showResult() {
+        isPaused = true
+        timer?.invalidate()
     }
 
 }
