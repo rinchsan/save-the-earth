@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // MARK: - Nodes
 
@@ -22,6 +22,7 @@ class GameScene: SKScene {
     let spaceshipCategory: UInt32 = 0b0001
     let missileCategory: UInt32 = 0b0010
     let asteroidCategory: UInt32 = 0b0100
+    let earthCategory: UInt32 = 0b1000
 
     // MARK: - Properties
 
@@ -33,15 +34,27 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        self.physicsWorld.contactDelegate = self
 
         earth = childNode(withName: "earth") as! SKSpriteNode
         earth.xScale = 2
         earth.yScale = 0.5
         earth.position = CGPoint(x: frame.width / 2, y: 0)
+        earth.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: frame.width, height: 100))
+        earth.physicsBody?.isDynamic = true
+        earth.physicsBody?.categoryBitMask = earthCategory
+        earth.physicsBody?.contactTestBitMask = asteroidCategory
+        earth.physicsBody?.collisionBitMask = 0
+        earth.zPosition = -1
 
         spaceship = SKSpriteNode(imageNamed: "spaceship")
         spaceship.scale(to: CGSize(width: frame.width / 5, height: frame.width / 5))
         spaceship.position = CGPoint(x: frame.width / 2, y: earth.frame.maxY + 50)
+        spaceship.physicsBody = SKPhysicsBody(circleOfRadius: spaceship.size.width * 0.1)
+        spaceship.physicsBody?.isDynamic = true
+        spaceship.physicsBody?.categoryBitMask = spaceshipCategory
+        spaceship.physicsBody?.contactTestBitMask = asteroidCategory
+        spaceship.physicsBody?.collisionBitMask = 0
         addChild(spaceship)
 
         motionManger.accelerometerUpdateInterval = 0.2
@@ -95,11 +108,36 @@ class GameScene: SKScene {
 
         self.addChild(asteroid)
 
-        let animationDuration:TimeInterval = 6
-        let moveAction = SKAction.move(to: CGPoint(x: positionX, y: -asteroid.size.height), duration: animationDuration)
-        let removeAction = SKAction.removeFromParent()
+        let moveAction = SKAction.move(to: CGPoint(x: positionX, y: -asteroid.size.height), duration: 6.0)
+        asteroid.run(moveAction)
+    }
 
-        asteroid.run(SKAction.sequence([moveAction, removeAction]))
+    func didBegin(_ contact: SKPhysicsContact) {
+        var asteroid: SKPhysicsBody
+        var collisionTarget: SKPhysicsBody
+        if contact.bodyA.categoryBitMask == asteroidCategory {
+            asteroid = contact.bodyA
+            collisionTarget = contact.bodyB
+        } else {
+            asteroid = contact.bodyB
+            collisionTarget = contact.bodyA
+        }
+
+        let asteroidNode = asteroid.node as! SKSpriteNode
+        let collisionTargetNode = collisionTarget.node as! SKSpriteNode
+
+        guard let explosion = SKEmitterNode(fileNamed: "Explosion") else { return }
+        explosion.position = asteroidNode.position
+        addChild(explosion)
+
+        asteroidNode.removeFromParent()
+        if collisionTarget.categoryBitMask == missileCategory {
+            collisionTargetNode.removeFromParent()
+        }
+
+        self.run(SKAction.wait(forDuration: 1.0)) {
+            explosion.removeFromParent()
+        }
     }
 
 }
