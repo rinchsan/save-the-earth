@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var earth: SKSpriteNode!
     var spaceship: SKSpriteNode!
+    var life: [SKSpriteNode] = [SKSpriteNode]()
 
     // MARK: - Category Bit Mask
 
@@ -65,6 +66,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(addAsteroid), userInfo: nil, repeats: true)
+
+        for i in 1...5 {
+            let heart = SKSpriteNode(imageNamed: "heart")
+            heart.position = CGPoint(x: heart.frame.height * CGFloat(i), y: frame.height - heart.frame.height)
+            addChild(heart)
+            life.append(heart)
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -137,6 +145,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.run(SKAction.wait(forDuration: 1.0)) {
             explosion.removeFromParent()
+        }
+
+        if collisionTarget.categoryBitMask == spaceshipCategory || collisionTarget.categoryBitMask == earthCategory {
+            guard let heart = life.last else { return }
+            heart.removeFromParent()
+            life.removeLast()
         }
     }
 
