@@ -16,6 +16,7 @@
 		572661051F2BBCBE009E0E24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 572661041F2BBCBE009E0E24 /* Assets.xcassets */; };
 		572661081F2BBCBE009E0E24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 572661061F2BBCBE009E0E24 /* LaunchScreen.storyboard */; };
 		5782A3C31F2BCFA200500EFD /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782A3C21F2BCFA200500EFD /* MenuViewController.swift */; };
+		5782A3C51F2CD43800500EFD /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5782A3C41F2CD43800500EFD /* Explosion.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		572661071F2BBCBE009E0E24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		572661091F2BBCBE009E0E24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5782A3C21F2BCFA200500EFD /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		5782A3C41F2CD43800500EFD /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				572660F91F2BBCBE009E0E24 /* GameScene.sks */,
 				572660FB1F2BBCBE009E0E24 /* Actions.sks */,
 				572660FD1F2BBCBE009E0E24 /* GameScene.swift */,
+				5782A3C41F2CD43800500EFD /* Explosion.sks */,
 				572660FF1F2BBCBE009E0E24 /* GameViewController.swift */,
 				572661011F2BBCBE009E0E24 /* Main.storyboard */,
 				5782A3C21F2BCFA200500EFD /* MenuViewController.swift */,
@@ -139,6 +142,7 @@
 				572661031F2BBCBE009E0E24 /* Main.storyboard in Resources */,
 				572660FA1F2BBCBE009E0E24 /* GameScene.sks in Resources */,
 				572661051F2BBCBE009E0E24 /* Assets.xcassets in Resources */,
+				5782A3C51F2CD43800500EFD /* Explosion.sks in Resources */,
 				572661081F2BBCBE009E0E24 /* LaunchScreen.storyboard in Resources */,
 				572660FC1F2BBCBE009E0E24 /* Actions.sks in Resources */,
 			);
