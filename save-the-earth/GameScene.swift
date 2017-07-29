@@ -37,6 +37,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     var vc: GameViewController!
+    var asteroidTimeInterval: TimeInterval = 6.0 {
+        didSet {
+            if asteroidTimeInterval < 2.0 { timerForAsteroidSpeed?.invalidate() }
+        }
+    }
+    var timerForAsteroidSpeed: Timer? = nil
 
     // MARK: - Life Cycle
 
@@ -86,6 +92,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontSize = 50
         scoreLabel.position = CGPoint(x: scoreLabel.frame.width / 2 + 50, y: frame.height - scoreLabel.frame.height * 5)
         addChild(scoreLabel)
+
+        timerForAsteroidSpeed = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            self.asteroidTimeInterval -= 0.5
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -130,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.addChild(asteroid)
 
-        let moveAction = SKAction.move(to: CGPoint(x: positionX, y: -asteroid.size.height), duration: 6.0)
+        let moveAction = SKAction.move(to: CGPoint(x: positionX, y: -asteroid.size.height), duration: asteroidTimeInterval)
         asteroid.run(moveAction)
     }
 
@@ -166,7 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let heart = life.last else { return }
             heart.removeFromParent()
             life.removeLast()
-            if life.isEmpty { showResult() }
+            if life.isEmpty { finishGame() }
         case missileCategory:
             score += 5
         default:
@@ -174,9 +184,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func showResult() {
+    func finishGame() {
         isPaused = true
         timer?.invalidate()
+        let bestScore = UserDefaults.standard.integer(forKey: "bestScore")
+        if score > bestScore {
+            UserDefaults.standard.set(score, forKey: "bestScore")
+        }
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
             self.vc.dismiss(animated: true, completion: nil)
         }

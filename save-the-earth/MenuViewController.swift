@@ -12,16 +12,18 @@ class MenuViewController: UIViewController {
 
     @IBOutlet weak var bestScoreLabel: UILabel!
 
-    var bestScore: Int! {
+    var bestScore: Int = 0 {
         didSet {
-            guard let score = bestScore else { return }
-            self.bestScoreLabel.text = "Best Score: \(score)"
+            self.bestScoreLabel.text = "Best Score: \(bestScore)"
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bestScore = 0
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        bestScore = UserDefaults.standard.integer(forKey: "bestScore")
     }
 
 }
