@@ -28,7 +28,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="IY6-vG-dMC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="30"/>
                                 <state key="normal" title="START">
                                     <color key="titleColor" red="0.01581127373742473" green="0.32188215775020151" blue="0.54491196065989855" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -111,6 +111,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="earth" width="4437" height="4437"/>
+        <image name="earth" width="1600" height="1200"/>
     </resources>
 </document>
