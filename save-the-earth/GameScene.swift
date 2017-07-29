@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let spaceshipCategory: UInt32 = 0b0001
     let missileCategory: UInt32 = 0b0010
     let asteroidCategory: UInt32 = 0b0100
+    let earthCategory: UInt32 = 0b1000
 
     // MARK: - Properties
 
@@ -39,6 +40,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         earth.xScale = 2
         earth.yScale = 0.5
         earth.position = CGPoint(x: frame.width / 2, y: 0)
+        earth.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: frame.width, height: 100))
+        earth.physicsBody?.isDynamic = true
+        earth.physicsBody?.categoryBitMask = earthCategory
+        earth.physicsBody?.contactTestBitMask = asteroidCategory
+        earth.physicsBody?.collisionBitMask = 0
+        earth.zPosition = -1
 
         spaceship = SKSpriteNode(imageNamed: "spaceship")
         spaceship.scale(to: CGSize(width: frame.width / 5, height: frame.width / 5))
@@ -102,8 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(asteroid)
 
         let moveAction = SKAction.move(to: CGPoint(x: positionX, y: -asteroid.size.height), duration: 6.0)
-        let removeAction = SKAction.removeFromParent()
-        asteroid.run(SKAction.sequence([moveAction, removeAction]))
+        asteroid.run(moveAction)
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
