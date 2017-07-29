@@ -27,6 +27,7 @@ class GameScene: SKScene {
 
     let motionManger = CMMotionManager()
     var acceleration: CGFloat = 0.0
+    var timer: Timer? = nil
 
     // MARK: - Life Cycle
 
@@ -49,6 +50,8 @@ class GameScene: SKScene {
             let acceleration = accelerometerData.acceleration
             self.acceleration = CGFloat(acceleration.x) * 0.75 + self.acceleration * 0.25
         }
+
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(addAsteroid), userInfo: nil, repeats: true)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -71,6 +74,32 @@ class GameScene: SKScene {
         guard nextPasitionX > 30 else { return }
         guard nextPasitionX < frame.width - 30 else { return }
         spaceship.position.x = nextPasitionX
+    }
+
+    func addAsteroid() {
+        let names = ["asteroid1", "asteroid2", "asteroid3"]
+        let index = Int(arc4random_uniform(UInt32(names.count)))
+        let name = names[index]
+        let asteroid = SKSpriteNode(imageNamed: name)
+
+        let random = CGFloat(arc4random_uniform(UINT32_MAX)) / CGFloat(UINT32_MAX)
+        let positionX = random * frame.width
+        asteroid.position = CGPoint(x: positionX, y: frame.height + asteroid.frame.height)
+        asteroid.scale(to: CGSize(width: 70, height: 70))
+
+        asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.frame.width)
+        asteroid.physicsBody?.isDynamic = true
+        asteroid.physicsBody?.categoryBitMask = asteroidCategory
+        asteroid.physicsBody?.contactTestBitMask = missileCategory + spaceshipCategory
+        asteroid.physicsBody?.collisionBitMask = 0
+
+        self.addChild(asteroid)
+
+        let animationDuration:TimeInterval = 6
+        let moveAction = SKAction.move(to: CGPoint(x: positionX, y: -asteroid.size.height), duration: animationDuration)
+        let removeAction = SKAction.removeFromParent()
+
+        asteroid.run(SKAction.sequence([moveAction, removeAction]))
     }
 
 }
