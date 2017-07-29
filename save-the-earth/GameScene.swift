@@ -166,7 +166,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             guard let heart = life.last else { return }
             heart.removeFromParent()
             life.removeLast()
-            if life.isEmpty { showResult() }
+            if life.isEmpty { finishGame() }
         case missileCategory:
             score += 5
         default:
@@ -174,7 +174,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    func showResult() {
+    func finishGame() {
         isPaused = true
         timer?.invalidate()
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
