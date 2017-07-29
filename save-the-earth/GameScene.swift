@@ -177,6 +177,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func finishGame() {
         isPaused = true
         timer?.invalidate()
+        let bestScore = UserDefaults.standard.integer(forKey: "bestScore")
+        if score > bestScore {
+            UserDefaults.standard.set(score, forKey: "bestScore")
+        }
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
             self.vc.dismiss(animated: true, completion: nil)
         }

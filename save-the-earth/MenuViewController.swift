@@ -20,8 +20,10 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let score = UserDefaults.standard.value(forKey: "bestScore") else { return }
-        self.bestScore = score as! Int
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        bestScore = UserDefaults.standard.integer(forKey: "bestScore")
     }
 
 }
