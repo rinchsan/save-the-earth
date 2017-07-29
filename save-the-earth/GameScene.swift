@@ -159,10 +159,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.removeFromParent()
         }
 
-        if collisionTarget.categoryBitMask == spaceshipCategory || collisionTarget.categoryBitMask == earthCategory {
+        switch collisionTarget.categoryBitMask {
+        case spaceshipCategory, earthCategory:
             guard let heart = life.last else { return }
             heart.removeFromParent()
             life.removeLast()
+        case missileCategory:
+            score += 5
+        default:
+            fatalError()
         }
     }
 
