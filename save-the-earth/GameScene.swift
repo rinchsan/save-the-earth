@@ -36,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var vc: GameViewController!
 
     // MARK: - Life Cycle
 
@@ -176,6 +177,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func showResult() {
         isPaused = true
         timer?.invalidate()
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            self.vc.dismiss(animated: true, completion: nil)
+        }
     }
 
 }
